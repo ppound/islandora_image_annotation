@@ -1,0 +1,165 @@
+<?php
+
+define('ISLANDORA_IMAGE_ANNOTATION_VIEW', 'view image annotations');
+define('ISLANDORA_IMAGE_ANNOTATIONS_CREATE', 'create image annotations');
+
+function islandora_image_annotation_menu() {
+  $items = array();
+  $items['admin/islandora/image_annotation'] = array(
+    'title' => 'Image annotation',
+    'description' => 'Configure the image annotation module.',
+    'page callback' => 'drupal_get_form',
+    'access arguments' => array('administer site configuration'),
+    'page arguments' => array('islandora_image_annotation_admin'),
+    'file' => 'admin/islandora_image_annotation.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['emic/shared/test'] = array(
+    'page callback' => 'build_manifest',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation_build_streams.inc',
+  );
+
+  $items['emic/shared/setup'] = array(
+    'page callback' => 'islandora_canvas_setup',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation.callbacks.inc',
+  );
+
+  $items['emic/shared/add_annotation'] = array(
+    'page callback' => 'islandora_add_annotation',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation.callbacks.inc',
+  );
+
+  $items['emic/get_urns'] = array(
+    'page callback' => 'islandora_shared_get_annotation_urns',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation.callbacks.inc',
+  );
+
+  $items['emic/get_annotation'] = array(
+    'page callback' => 'islandora_shared_get_annotation',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation.callbacks.inc',
+  );
+  $items['emic/delete_annotation'] = array(
+    'page callback' => 'islandora_delete_annotation',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation.callbacks.inc',
+  );
+
+  $items['emic/serve'] = array(
+    'page callback' => 'emic_serve',
+    'type' => MENU_CALLBACK,
+    'access arguments' => array('view fedora collection'),
+    'file' => 'includes/islandora_image_annotation_build_streams.inc',
+  );
+
+  $items['islandora/object/%islandora_object/view/annoation'] = array(
+    'title' => 'Image Annotation',
+    'page callback' => 'islandora_image_annotation_view',
+    'page arguments' => array(2),
+    'type' => MENU_LOCAL_TASK,
+    'access callback' => 'islandora_image_annotation_access',
+    'access arguments' => array(2),
+  );
+
+  return $items;
+}
+
+/**
+ * drupal hook_permissions function
+ * @return array
+ */
+function islandora_image_annotation_permission() {
+  return array(
+    ISLANDORA_IMAGE_ANNOTATION_VIEW => array(
+      'title' => t('View image annotations'),
+      'description' => t('View image annotations.')
+    ),
+    ISLANDORA_IMAGE_ANNOTATIONS_CREATE => array(
+      'title' => t('Create image Annotations'),
+      'description' => t('Create image Annotations')
+    ),
+  );
+}
+
+/**
+ * determines whether or not to show this modules view tab
+ * @global object $user
+ * @param FedoraObject $fedora_object
+ * @return boolean
+ */
+function islandora_image_annotation_access($fedora_object) {
+  if (!isset($fedora_object)) {
+    return FALSE;
+  }
+
+  $models = $fedora_object->models;
+  $cmodel_list = islandora_image_annotation_islandora_get_types();
+  foreach ($fedora_object->models as $model) {
+    if (isset($cmodel_list[$model])) {
+      return user_access(FEDORA_VIEW);
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Theme registry function
+ * We supply a pattern so we can overide templates at the theme level if needed.
+ * we can append a pid to a template and the new template file will be called (the pids
+ * colon should be replaced with a dash)
+ * @return array
+ */
+function islandora_image_annotation_theme($existing, $type, $theme, $path) {
+  return array(
+    'islandora_image_annotation_view' => array(
+      'template' => 'theme/islandora-image-annotation',
+      'variables' => array('islandora_objects' => NULL),
+    ),
+  );
+}
+
+/**
+ * /**
+ * the image annotation view 
+ * /
+ * @param FedoraObject $object
+ * @return string 
+ */
+function islandora_image_annotation_view($object) {
+  $output = theme('islandora_image_annotation_view', array('islandora_object' => $object));
+  return $output;
+}
+
+function islandora_image_annotation_preprocess_islandora_image_annotation_view(&$variables) {
+  global $base_url;
+  $islandora_object = $variables['islandora_object'];
+  $pid = $islandora_object->id;
+  $path = drupal_get_path('module', 'islandora_image_annotation');
+  $src = "$base_url/$path/shared_canvas/index.php?PID=$pid";
+  $variables['islandora_image_annotation_src'] = $src;
+  $variables['islandora_image_annotation_pid'] = $pid;
+}
+
+/**
+ * tells the main module what types of objects we support.  This is used to determine whether or not
+ * this module should attempt to respond.
+ * @return array 
+ *   array of content model pids that this module supports
+ */
+function islandora_image_annotation_islandora_get_types() {
+  $types = array();
+  $types['islandora:sp_basic_image'][ISLANDORA_VIEW_HOOK] = variable_get('islandora_basic_image_use_for_default_tab', TRUE);
+  //$types['islandora:sp_basic_image'][ISLANDORA_EDIT_HOOK] = FALSE;
+  return $types;
+}
+

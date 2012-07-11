@@ -1,0 +1,8 @@
+
+name = Islandora Image Annotation
+description = Our version of the Shared Canvas Project
+dependencies[] = islandora
+package = Image
+core = 7.x
+
+
