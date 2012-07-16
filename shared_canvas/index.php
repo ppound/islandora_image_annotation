@@ -4,31 +4,13 @@
   <head>
     <title></title>
     
-    <!-- CWRC stylesheets -->
    <link type="text/css" rel="stylesheet" href="css/smoothness/jquery-ui-1.8.16.custom.css" />
     
      
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script type="text/javascript" src="js/jquery/jquery-1.7.js"></script>
     <script type="text/javascript" src="js/jquery/jquery-ui-1.8.13.custom.min.js"></script>
-    <!--<script type="text/javascript" src="js/jquery/jquery.contextmenu.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery.mousewheel.js"></script>
-    <script type="text/javascript" src="js/jquery/jquery.watermark.min.js"></script>
-    <script type="text/javascript" src="js/tinymce/jscripts/tiny_mce/jquery.tinymce.js"></script>
-    <script type="text/javascript" src="js/jstree/jquery.hotkeys.js"></script>
-    <script type="text/javascript" src="js/jstree/jquery.jstree.js"></script>
-    <script type="text/javascript" src="js/snippet/jquery.snippet.min.js"></script>
-    <script type="text/javascript" src="js/dialogs/dialog_settings.js"></script>
-    <script type="text/javascript" src="js/dialogs/dialog_search.js"></script>
-
-    <script type="text/javascript" src="js/editor.js"></script>
-    <script type="text/javascript" src="js/dialog.js"></script>
-    <script type="text/javascript" src="js/filemanager.js"></script>
-    <script type="text/javascript" src="js/gzoom.js"></script>
-    <script type="text/javascript" src="js/structuretree.js"></script>
-    <script type="text/javascript" src="js/entitieslist.js"></script>
-    <script type="text/javascript" src="js/resize-columns.js"></script>
-    <script type="text/javascript" src="Islandora/js/startup.js"></script>-->
+    
     
     <!-- Canvas js -->
     <script type="text/javascript" src="js/resize-columns.js"></script>
@@ -47,17 +29,16 @@
     <script src="stable/islandora_emic_init.js" type="text/javascript"></script>
     <script src="stable/sc_ui.js" type="text/javascript"></script>
     <script src="stable/sc_utils.js" type="text/javascript"></script>
-
+    <script src="stable/sc_pastebin.js" type="text/javascript"></script>
     <script src="stable/sc_rdf.js" type="text/javascript"></script>
     <script src="stable/sc_rdfjson.js" type="text/javascript"></script>
     <script src="stable/sc_create.js" type="text/javascript"></script>
     <script src="stable/sc_gdata.js" type="text/javascript"></script>
-    <script src="stable/sc_pastebin.js" type="text/javascript"></script>
-
+        
     <!-- Canvas css -->
     <link rel="stylesheet" href="css/sc.css" type="text/css" />
     <link rel="stylesheet" href="css/emic_canvas.css" type="text/css" />
-
+      
     <!-- CWRC stylesheets -->
     <link type="text/css" rel="stylesheet" href="css/screen.css" />
     <link type="text/css" rel="stylesheet" href="css/style.css" />
@@ -183,10 +164,7 @@
                 <div id="loadprogress"></div>
                         
               <!--  At least one visible image needed for GData transport -->
-              <div class="shared-canvas-logo" style="font-size:8pt">
-                <img height="25" src="imgs/small-logo.png" style="padding: 0px; margin: 0px; border: 0px; border-top: 2px;" />
-                Powered by SharedCanvas
-              </div>
+             
             
             </div>
             </div>
@@ -240,6 +218,11 @@
       </div>
     </div>
 
-    
+     <!-- Footer -->
+    <div id="footer">
+      <div class="shared-canvas-logo" style="font-size:8pt">
+                <img height="15" src="imgs/small-logo.png" style="padding: 0px; margin: 0px; border: 0px; border-top: 2px;" />
+                Powered by SharedCanvas
+              </div></div>
   </body>
 </html>

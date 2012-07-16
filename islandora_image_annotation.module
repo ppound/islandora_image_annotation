@@ -148,6 +148,11 @@ function islandora_image_annotation_preprocess_islandora_image_annotation_view(&
   $src = "$base_url/$path/shared_canvas/index.php?PID=$pid";
   $variables['islandora_image_annotation_src'] = $src;
   $variables['islandora_image_annotation_pid'] = $pid;
+  
+  drupal_add_js($path . '/shared_canvas/js/window_behaviours.js');
+
+  // add css
+  drupal_add_css($path . '/shared_canvas/css/window_behaviours.css');
 }
 
 /**

@@ -91,6 +91,13 @@ class IslandoraRdfBuilder {
     $this->xpath->registerNamespace('oac', 'http://www.openannotation.org/ns/');
   }
 
+  /**
+   *
+   * @param string $id
+   *  the uuid containing urn:uuid:...
+   * @return string
+   *   a uuid containing urn:uuid:... this is the uuid of the hasBody node 
+   */
   function getAnnotationBodyUrn($id) {
     if (empty($this->xpath)) {
       $this->setXPath();
@@ -103,6 +110,14 @@ class IslandoraRdfBuilder {
     return $resource;
   }
 
+  /**
+   *
+   * @param string $id
+   *  the uuid containing urn:uuid:...
+   * @return string
+   *   a uuid containing urn:uuid:... this is the uuid of the hasTarget node 
+   * 
+   */
   function getAnnotationTargetUrn($id) {
     if (empty($this->xpath)) {
       $this->setXPath();
@@ -114,6 +129,15 @@ class IslandoraRdfBuilder {
     return $resource;
   }
 
+  /**
+   *
+   * @param string $id
+   *  the uuid containing urn:uuid:...
+   * @return string
+   *   a uuid containing urn:uuid:... this is the uuid of the constrainedBy node 
+   *
+   *
+   */
   function getConstrainedTarget($id) {
     if (empty($this->xpath)) {
       $this->setXPath();
@@ -125,6 +149,11 @@ class IslandoraRdfBuilder {
     return $resource;
   }
 
+  /**
+   *
+   * @param string $node_id 
+   *   uuid 
+   */
   function deleteDescriptionElement($node_id) {
     $xpath = new DOMXPath($this->domDoc);
     $candidates = $xpath->query("//rdf:Description[@rdf:about='$node_id']");

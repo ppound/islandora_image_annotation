@@ -661,12 +661,12 @@ A:hover
 
 #footer
 {
-  height: 34px;
+  height: 20px;
   /* Changed from absolute to fixed for IE */
   position: fixed;
   left: 0px;
   right: 0px;
-  background: url('../imgs/emic-logo') 20px 7px no-repeat transparent;
+  
 }
 
 #footer p
