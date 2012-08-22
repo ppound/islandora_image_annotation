@@ -873,7 +873,7 @@ function paint_svgArea(svgc, annoId, col, svg) {
 	}
 	pthelm = npth;
         //upei changed to override opacity and fill widen stroke
-	pthelm.setAttribute('style', 'fill:none;opacity:none;stroke:'+col+';stroke-width:6');
+	pthelm.setAttribute('style', 'fill:none;opacity:none;stroke:'+col+';stroke-width:12');
 	pthelm.setAttribute('class', 'svg_' + annoId);
 	svgc.canvas.appendChild(pthelm);
 	
