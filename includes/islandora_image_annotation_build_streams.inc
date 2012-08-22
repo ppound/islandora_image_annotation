@@ -297,6 +297,9 @@ function get_height_and_width($pid) {
   }
   $filename = $djatoka_prefix . "$fedora_prefix/objects/$pid/datastreams/$dsid/content&svc_id=info:lanl-repo/svc/getMetadata";
   $pageData = json_decode(file_get_contents($filename));
+  if(empty($pageData)){
+    drupal_set_message(t('There was an error getting the image size.  Djatoka may need to be configured.'),'error');
+  }
 
   return array(
     'height' => $pageData->height,

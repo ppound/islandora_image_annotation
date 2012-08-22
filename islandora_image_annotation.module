@@ -1,7 +1,7 @@
 <?php
 
 define('ISLANDORA_IMAGE_ANNOTATION_VIEW', 'view image annotations');
-define('ISLANDORA_IMAGE_ANNOTATIONS_CREATE', 'create image annotations');
+define('ISLANDORA_IMAGE_ANNOTATION_CREATE', 'create image annotations');
 
 function islandora_image_annotation_menu() {
   $items = array();
@@ -17,48 +17,48 @@ function islandora_image_annotation_menu() {
   $items['emic/shared/test'] = array(
     'page callback' => 'build_manifest',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
     'file' => 'includes/islandora_image_annotation_build_streams.inc',
   );
 
   $items['emic/shared/setup'] = array(
     'page callback' => 'islandora_canvas_setup',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
     'file' => 'includes/islandora_image_annotation.callbacks.inc',
   );
 
   $items['emic/shared/add_annotation'] = array(
     'page callback' => 'islandora_add_annotation',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
     'file' => 'includes/islandora_image_annotation.callbacks.inc',
   );
 
   $items['emic/get_urns'] = array(
     'page callback' => 'islandora_shared_get_annotation_urns',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
     'file' => 'includes/islandora_image_annotation.callbacks.inc',
   );
 
   $items['emic/get_annotation'] = array(
     'page callback' => 'islandora_shared_get_annotation',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
     'file' => 'includes/islandora_image_annotation.callbacks.inc',
   );
   $items['emic/delete_annotation'] = array(
     'page callback' => 'islandora_delete_annotation',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_CREATE),
     'file' => 'includes/islandora_image_annotation.callbacks.inc',
   );
 
   $items['emic/serve'] = array(
     'page callback' => 'emic_serve',
     'type' => MENU_CALLBACK,
-    'access arguments' => array('view fedora collection'),
+    'access arguments' => array(ISLANDORA_IMAGE_ANNOTATION_VIEW),
     'file' => 'includes/islandora_image_annotation_build_streams.inc',
   );
 
@@ -81,11 +81,11 @@ function islandora_image_annotation_menu() {
 function islandora_image_annotation_permission() {
   return array(
     ISLANDORA_IMAGE_ANNOTATION_VIEW => array(
-      'title' => t('View image annotations'),
+      'title' => t(ISLANDORA_IMAGE_ANNOTATION_VIEW),
       'description' => t('View image annotations.')
     ),
     ISLANDORA_IMAGE_ANNOTATIONS_CREATE => array(
-      'title' => t('Create image Annotations'),
+      'title' => t(ISLANDORA_IMAGE_ANNOTATION_CREATE),
       'description' => t('Create image Annotations')
     ),
   );
@@ -106,7 +106,7 @@ function islandora_image_annotation_access($fedora_object) {
   $cmodel_list = islandora_image_annotation_islandora_get_types();
   foreach ($fedora_object->models as $model) {
     if (isset($cmodel_list[$model])) {
-      return user_access(FEDORA_VIEW);
+      return user_access(ISLANDORA_IMAGE_ANNOTATION_VIEW);
     }
   }
   return FALSE;

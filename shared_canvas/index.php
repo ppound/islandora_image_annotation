@@ -26,7 +26,7 @@
     
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     
-    <script src="stable/islandora_emic_init.js" type="text/javascript"></script>
+    <script src="stable/islandora_image_annotation_init.js" type="text/javascript"></script>
     <script src="stable/sc_ui.js" type="text/javascript"></script>
     <script src="stable/sc_utils.js" type="text/javascript"></script>
     <script src="stable/sc_pastebin.js" type="text/javascript"></script>
