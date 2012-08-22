@@ -872,7 +872,8 @@ function paint_svgArea(svgc, annoId, col, svg) {
 		npth.setAttribute(attr.nodeName, attr.nodeValue);
 	}
 	pthelm = npth;
-	pthelm.setAttribute('style', 'opacity:0.4;fill:' + col +';stroke-width:2;');
+        //upei changed to override opacity and fill widen stroke
+	pthelm.setAttribute('style', 'fill:none;opacity:none;stroke:'+col+';stroke-width:6');
 	pthelm.setAttribute('class', 'svg_' + annoId);
 	svgc.canvas.appendChild(pthelm);
 	
