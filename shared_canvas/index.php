@@ -48,14 +48,14 @@
   <body>
     <!-- Header -->
     <div id="header">
-      <div id="page_selector">Loading....</div>
+      <!--<div id="page_selector">Loading....</div>
       <div id="header-inner">
         <div class="header-nav">
           <a href="" id="page-prev"></a>
           <a href="" id="page-next"></a>
         </div>
         <h1></h1>
-      </div>
+      </div>-->
       
     </div>
     <!-- Body -->
